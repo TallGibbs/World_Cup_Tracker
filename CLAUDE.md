@@ -303,6 +303,10 @@ It must print `ALL CHECKS PASSED`. What it enforces:
   of `WC.teams`, and **every archive `href` resolves to a file that actually
   exists in the repository** - this is what stops a dead link to a frozen
   snapshot.
+- **`/today` mode (`WC.today.mode`, `WC.roadTo2027`):** `mode` must be `"games"`
+  or `"roadmap"`; `"roadmap"` requires `WC.roadTo2027`, whose `heading`/`intro`/
+  `source` must be populated, with a `timeline` of >=2 entries and a non-empty
+  `featured` array.
 - **Hygiene:** every tournament name states its edition, and there are no emojis
   or placeholder tokens in the data.
 - **Bracket resolution (gated on `WC.bracket`):** round sizes, integer scores,
@@ -369,7 +373,36 @@ cards lower down), which is a separate, backward-looking field. Keep the two
 distinct: `note` = what just happened to the team; `preview` = what to watch in
 the next fixture.
 
-## Today's Games page (`WC.today`)
+## The `/today` page: two modes, one toggle
+
+`today.html` has two renderers, chosen by a single field, **`WC.today.mode`**:
+
+- **`"games"`** (or the field absent) - the live **Today's Games** feature:
+  every match on the current date, with previews and standings. This is the
+  tournament-time behaviour, described below.
+- **`"roadmap"`** - the between-tournaments **Road to 2027** page, rendered from
+  `WC.roadTo2027` (featured nations' qualifying routes, a qualifying calendar,
+  and the slot allocation). **This is the current mode.**
+
+`renderGames()` and `renderRoadmap()` both live in `today.html` and neither
+touches the other's markup, so **flipping `WC.today.mode` is the only change
+needed to switch** - no code edit. The `/today` nav label on all three pages and
+the page `<title>` follow the mode automatically (they read `WC.today.mode`, with
+a static "Today's Games" fallback).
+
+**To bring the live Today's Games feature back when the 2027 tournament starts:**
+set `WC.today.mode` to `"games"` (or remove the field) and populate
+`WC.today.games` / `date` / `stageLabel` / `schedNote` / `kits` as below. You may
+leave `WC.roadTo2027` in place (dormant) or delete it. Nothing else changes.
+
+While in `"roadmap"` mode, keep `WC.roadTo2027` current each run: refresh the
+qualifying calendar as windows pass, and once a featured nation's fate is known
+from a structured source (ESPN carries the UEFA qualifiers as `fifa.wworldq.uefa`
+and the `concacaf.womens.championship`), update its `featured` entry. Still
+refresh `WC.today.date` to today every run - the freshness check applies in both
+modes.
+
+### Today's Games mode (`WC.today`)
 
 `today.html` lists every match being played on the **current date** and must be
 refreshed each run so it never shows a past day's fixtures. Edit the `WC.today`

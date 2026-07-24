@@ -208,6 +208,25 @@ if (WC) {
     });
   }
 
+  /* ---------- WC.today.mode + WC.roadTo2027 (interim /today repurpose) ----------
+     A single field, WC.today.mode, toggles the /today page between its live
+     "games" renderer and the between-tournaments "roadmap" renderer. Absent or
+     "games" is the live default; "roadmap" requires WC.roadTo2027 to exist. */
+  const todayMode = (WC.today && WC.today.mode) || 'games';
+  if (WC.today && WC.today.mode != null && todayMode !== 'games' && todayMode !== 'roadmap')
+    fail(`WC.today.mode must be "games" or "roadmap" (got "${WC.today.mode}")`);
+  if (todayMode === 'roadmap' && !WC.roadTo2027)
+    fail('WC.today.mode is "roadmap" but WC.roadTo2027 is missing');
+  if (WC.roadTo2027) {
+    const rm = WC.roadTo2027;
+    for (const k of ['heading', 'intro', 'source']) if (typeof rm[k] !== 'string' || !rm[k].trim()) fail(`WC.roadTo2027: missing or empty "${k}"`);
+    if (!Array.isArray(rm.timeline) || rm.timeline.length < 2) fail('WC.roadTo2027.timeline must be an array of >=2 entries');
+    else rm.timeline.forEach((t, i) => { for (const k of ['window', 'event']) if (!t[k]) fail(`WC.roadTo2027.timeline[${i}]: missing "${k}"`); });
+    if (!Array.isArray(rm.featured) || !rm.featured.length) fail('WC.roadTo2027.featured must be a non-empty array');
+    else rm.featured.forEach((f, i) => { for (const k of ['team', 'detail']) if (!f[k]) fail(`WC.roadTo2027.featured[${i}]: missing "${k}"`); });
+    if (rm.slots && !Array.isArray(rm.slots.rows)) fail('WC.roadTo2027.slots.rows must be an array when slots is present');
+  }
+
   /* Today's Games */
   const today = WC.today || {};
   if (norm(today.date) !== norm(expectedLong)) fail(`WC.today.date = "${today.date}", expected today "${expectedLong}"`);

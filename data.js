@@ -1512,12 +1512,64 @@ const WC = {
     }
   ],
   "today": {
+    "mode": "roadmap",
     "date": "Friday, July 24, 2026",
     "stageLabel": "Between tournaments",
     "tz": "Kickoff times are listed in Eastern Time (ET) whenever there are matches to list. There are none until the Women's World Cup opens in Brazil on June 24, 2027.",
     "schedNote": "No matches. The Men's World Cup 2026 finished on July 19 and the next tournament is the Women's World Cup, which opens in Brazil on June 24, 2027. This page refreshes weekly and will fill up again once that schedule is published.",
     "kits": {},
     "games": []
+  },
+  "roadTo2027": {
+    "heading": "The Road to Brazil 2027",
+    "tag": "Women's World Cup",
+    "intro": "The next FIFA World Cup is the women's tournament, and it opens in Brazil on June 24, 2027 - thirty-two teams, eight groups, and hosts Brazil already through. Between now and then, a qualifying race decides who joins them. This page follows that road.",
+    "draw": "The group-stage draw is expected in December 2026 and has not been officially scheduled, so there is no bracket to show yet. Until the draw, the story is qualification.",
+    "featured": [
+      {
+        "team": "USA",
+        "color": "#0A3161",
+        "confed": "CONCACAF",
+        "route": "2026 Concacaf W Championship",
+        "detail": "Not yet qualified. The USA go through an eight-team knockout (Nov 27 to Dec 5): win the quarter-final and they are through to Brazil; lose it and they drop into a play-in for a place in the inter-confederation play-off."
+      },
+      {
+        "team": "England",
+        "color": "#CE1124",
+        "confed": "UEFA",
+        "route": "European qualifiers",
+        "detail": "England take the European route. The league phase finished in June; the play-offs on October 9 to 13 and again in late November decide the places still open."
+      },
+      {
+        "team": "Netherlands",
+        "color": "#F36C21",
+        "confed": "UEFA",
+        "route": "European qualifiers",
+        "detail": "The Netherlands follow the same European route, decided by the spring league phase and, if needed, the October-to-December play-offs."
+      }
+    ],
+    "timeline": [
+      {"window": "Jul - Aug 2026", "event": "CAF WAFCON", "detail": "Africa's qualifying tournament decides the CAF places.", "featured": false},
+      {"window": "Oct 9 - 13, 2026", "event": "UEFA play-offs, round 1", "detail": "Europe's route for England and the Netherlands.", "featured": true},
+      {"window": "Nov 27 - Dec 5, 2026", "event": "Concacaf W Championship", "detail": "The USA's route: an eight-team knockout in Texas, with quarter-final winners going straight to Brazil.", "featured": true},
+      {"window": "Nov - Dec 2026", "event": "UEFA play-offs, round 2", "detail": "Europe's remaining direct places and a play-off berth are settled.", "featured": true},
+      {"window": "Nov 2026 - Feb 2027", "event": "Inter-confederation play-off", "detail": "Ten teams across two phases contest the final three World Cup places.", "featured": false},
+      {"window": "Dec 2026 (expected)", "event": "Final draw", "detail": "Groups are drawn; the knockout bracket can be built once this happens.", "featured": false},
+      {"window": "Jun 24, 2027", "event": "Brazil 2027 kicks off", "detail": "The opening match of the tournament.", "featured": false}
+    ],
+    "slots": {
+      "note": "Twenty-nine places are decided directly by the six confederations; the last three go to the winners of a ten-team inter-confederation play-off. Brazil take one of CONMEBOL's places as hosts.",
+      "rows": [
+        {"confed": "UEFA (Europe)", "direct": "11 direct", "po": "+1 to play-off"},
+        {"confed": "AFC (Asia)", "direct": "6 direct", "po": "+2 to play-off"},
+        {"confed": "CAF (Africa)", "direct": "4 direct", "po": "+2 to play-off"},
+        {"confed": "CONCACAF (N. America)", "direct": "4 direct", "po": "+2 to play-off"},
+        {"confed": "CONMEBOL (S. America)", "direct": "3 direct, incl. Brazil", "po": "+2 to play-off"},
+        {"confed": "OFC (Oceania)", "direct": "1 direct", "po": "+1 to play-off"}
+      ]
+    },
+    "liveNote": "Live fixtures and results will appear here as each qualifying window arrives, from the same structured sources the tracker uses.",
+    "source": "Tournament facts from FIFA; qualifying calendars from the ESPN structured API (the UEFA slug fifa.wworldq.uefa and the Concacaf W Championship), cross-checked against public 2027 FIFA Women's World Cup qualification records. Retrieved 2026-07-24. AFC, CONMEBOL and OFC qualifying windows are not all finalised."
   },
   "bracket": {
     "source": "ESPN fifa.world scoreboard API (structured JSON; every knockout result now final through the final itself - Spain beat Argentina 1-0 at MetLife Stadium to win the World Cup), retrieved 2026-07-20",
