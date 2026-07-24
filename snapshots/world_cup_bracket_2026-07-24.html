@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>World Cup Tracker - Men's 2026 Bracket</title>
+<title>World Cup Tracker - Women's 2027 Bracket</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -414,7 +414,7 @@
 
   <div class="legend">
     <span class="k"><span class="sw" style="background:var(--qual)"></span> Winner advances</span>
-    <span class="k"><span class="sw" style="background:var(--third)"></span> Best third-placed entrant</span>
+    <span class="k" style="color:var(--faint)">Slots show group positions until the December 2026 draw.</span>
     <span class="k" style="color:var(--faint)">Scroll sideways to follow each side of the draw to the Final.</span>
   </div>
 
@@ -426,7 +426,7 @@
   <section aria-label="Knockout bracket by round" class="bracket-rounds" id="bracket-rounds"></section>
 
   <div class="footer">
-    <span>Times shown in <b>ET</b>. Single elimination &middot; winners advance; the two losing semi-finalists meet in the third-place play-off.</span>
+    <span>Teams, kickoff times and venues are set after the <b>December 2026 draw</b> and the FIFA match schedule. Single elimination; the two losing semi-finalists meet in the third-place play-off.</span>
     <span id="updated"></span>
   </div>
 
@@ -2008,447 +2008,91 @@ const WC = {
     "source": "Tournament facts from FIFA; qualifying calendars from the ESPN structured API (the UEFA slug fifa.wworldq.uefa and the Concacaf W Championship), cross-checked against public 2027 FIFA Women's World Cup qualification records. Retrieved 2026-07-24. AFC, CONMEBOL and OFC qualifying windows are not all finalised."
   },
   "bracket": {
-    "source": "ESPN fifa.world scoreboard API (structured JSON; every knockout result now final through the final itself - Spain beat Argentina 1-0 at MetLife Stadium to win the World Cup), retrieved 2026-07-20",
+    "pending": true,
+    "source": "Standard 32-team knockout structure for the 2027 FIFA Women's World Cup (eight groups, the top two of each reach the Round of 16). Slots show the group positions; teams, kickoff times and venues are filled in after the December 2026 final draw and the FIFA match schedule. Structure recorded 2026-07-24.",
+    "note": "The 2027 FIFA Women's World Cup knockout bracket. Thirty-two teams, eight groups; the top two of each reach the Round of 16. The draw is in December 2026 - until then the bracket shows its shape, from the Round of 16 to the Final.",
     "rounds": [
-      {
-        "key": "r32",
-        "label": "Round of 32",
-        "matches": [
-          {
-            "id": "R32-1",
-            "home": "Runner-up Group A",
-            "away": "Runner-up Group B",
-            "homeTeam": "South Africa",
-            "awayTeam": "Canada",
-            "kick": "Sun, Jun 28, 3:00 PM ET",
-            "iso": "2026-06-28T15:00:00-04:00",
-            "venue": "SoFi Stadium, Inglewood",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 0,
-            "as": 1,
-            "pens": null,
-            "winner": "Canada",
-            "feedsInto": "R16-2",
-            "feedsSide": "home"
-          },
-          {
-            "id": "R32-2",
-            "home": "Winner Group E",
-            "away": "Best 3rd (A/B/C/D/F)",
-            "homeTeam": "Germany",
-            "awayTeam": "Paraguay",
-            "kick": "Mon, Jun 29, 4:30 PM ET",
-            "iso": "2026-06-29T16:30:00-04:00",
-            "venue": "Gillette Stadium, Foxborough",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 1,
-            "pens": "3-4",
-            "winner": "Paraguay",
-            "feedsInto": "R16-1",
-            "feedsSide": "home"
-          },
-          {
-            "id": "R32-3",
-            "home": "Winner Group F",
-            "away": "Runner-up Group C",
-            "homeTeam": "Netherlands",
-            "awayTeam": "Morocco",
-            "kick": "Mon, Jun 29, 9:00 PM ET",
-            "iso": "2026-06-29T21:00:00-04:00",
-            "venue": "Estadio BBVA, Guadalupe",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 1,
-            "pens": "2-3",
-            "winner": "Morocco",
-            "feedsInto": "R16-2",
-            "feedsSide": "away"
-          },
-          {
-            "id": "R32-4",
-            "home": "Winner Group C",
-            "away": "Runner-up Group F",
-            "homeTeam": "Brazil",
-            "awayTeam": "Japan",
-            "kick": "Mon, Jun 29, 1:00 PM ET",
-            "iso": "2026-06-29T13:00:00-04:00",
-            "venue": "NRG Stadium, Houston",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 2,
-            "as": 1,
-            "pens": null,
-            "winner": "Brazil",
-            "feedsInto": "R16-3",
-            "feedsSide": "home"
-          },
-          {
-            "id": "R32-5",
-            "home": "Winner Group I",
-            "away": "Best 3rd (C/D/F/G/H)",
-            "homeTeam": "France",
-            "awayTeam": "Sweden",
-            "kick": "Tue, Jun 30, 5:00 PM ET",
-            "iso": "2026-06-30T17:00:00-04:00",
-            "venue": "MetLife Stadium, East Rutherford",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 3,
-            "as": 0,
-            "pens": null,
-            "winner": "France",
-            "feedsInto": "R16-1",
-            "feedsSide": "away"
-          },
-          {
-            "id": "R32-6",
-            "home": "Runner-up Group E",
-            "away": "Runner-up Group I",
-            "homeTeam": "Ivory Coast",
-            "awayTeam": "Norway",
-            "kick": "Tue, Jun 30, 1:00 PM ET",
-            "iso": "2026-06-30T13:00:00-04:00",
-            "venue": "AT&T Stadium, Arlington",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 2,
-            "pens": null,
-            "winner": "Norway",
-            "feedsInto": "R16-3",
-            "feedsSide": "away"
-          },
-          {
-            "id": "R32-7",
-            "home": "Winner Group A",
-            "away": "Best 3rd (C/E/F/H/I)",
-            "homeTeam": "Mexico",
-            "awayTeam": "Ecuador",
-            "kick": "Tue, Jun 30, 9:00 PM ET",
-            "iso": "2026-06-30T21:00:00-04:00",
-            "venue": "Estadio Banorte, Mexico City",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 2,
-            "as": 0,
-            "pens": null,
-            "winner": "Mexico",
-            "feedsInto": "R16-4",
-            "feedsSide": "home"
-          },
-          {
-            "id": "R32-8",
-            "home": "Winner Group L",
-            "away": "Best 3rd (E/H/I/J/K)",
-            "homeTeam": "England",
-            "awayTeam": "DR Congo",
-            "kick": "Wed, Jul 1, 12:00 PM ET",
-            "iso": "2026-07-01T12:00:00-04:00",
-            "venue": "Mercedes-Benz Stadium, Atlanta",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 2,
-            "as": 1,
-            "pens": null,
-            "winner": "England",
-            "feedsInto": "R16-4",
-            "feedsSide": "away"
-          },
-          {
-            "id": "R32-9",
-            "home": "Winner Group D",
-            "away": "Best third-placed team",
-            "homeTeam": "USA",
-            "awayTeam": "Bosnia and Herzegovina",
-            "kick": "Wed, Jul 1, 8:00 PM ET",
-            "iso": "2026-07-01T20:00:00-04:00",
-            "venue": "Levi's Stadium, Santa Clara",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 2,
-            "as": 0,
-            "pens": null,
-            "winner": "USA",
-            "feedsInto": "R16-6",
-            "feedsSide": "home"
-          },
-          {
-            "id": "R32-10",
-            "home": "Winner Group G",
-            "away": "Best 3rd (A/E/H/I/J)",
-            "homeTeam": "Belgium",
-            "awayTeam": "Senegal",
-            "kick": "Wed, Jul 1, 4:00 PM ET",
-            "iso": "2026-07-01T16:00:00-04:00",
-            "venue": "Lumen Field, Seattle",
-            "tv": "FS1",
-            "status": "final",
-            "hs": 3,
-            "as": 2,
-            "pens": null,
-            "winner": "Belgium",
-            "feedsInto": "R16-6",
-            "feedsSide": "away"
-          },
-          {
-            "id": "R32-11",
-            "home": "Runner-up Group K",
-            "away": "Runner-up Group L",
-            "homeTeam": "Portugal",
-            "awayTeam": "Croatia",
-            "kick": "Thu, Jul 2, 7:00 PM ET",
-            "iso": "2026-07-02T19:00:00-04:00",
-            "venue": "BMO Field, Toronto",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 2,
-            "as": 1,
-            "pens": null,
-            "winner": "Portugal",
-            "feedsInto": "R16-5",
-            "feedsSide": "home"
-          },
-          {
-            "id": "R32-12",
-            "home": "Winner Group H",
-            "away": "Runner-up Group J",
-            "homeTeam": "Spain",
-            "awayTeam": "Austria",
-            "kick": "Thu, Jul 2, 3:00 PM ET",
-            "iso": "2026-07-02T15:00:00-04:00",
-            "venue": "SoFi Stadium, Inglewood",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 3,
-            "as": 0,
-            "pens": null,
-            "winner": "Spain",
-            "feedsInto": "R16-5",
-            "feedsSide": "away"
-          },
-          {
-            "id": "R32-13",
-            "home": "Winner Group B",
-            "away": "Best 3rd (E/F/G/I/J)",
-            "homeTeam": "Switzerland",
-            "awayTeam": "Algeria",
-            "kick": "Thu, Jul 2, 11:00 PM ET",
-            "iso": "2026-07-02T23:00:00-04:00",
-            "venue": "BC Place, Vancouver",
-            "tv": "FS1",
-            "status": "final",
-            "hs": 2,
-            "as": 0,
-            "pens": null,
-            "winner": "Switzerland",
-            "feedsInto": "R16-8",
-            "feedsSide": "home"
-          },
-          {
-            "id": "R32-14",
-            "home": "Winner Group J",
-            "away": "Runner-up Group H",
-            "homeTeam": "Argentina",
-            "awayTeam": "Cape Verde",
-            "kick": "Fri, Jul 3, 6:00 PM ET",
-            "iso": "2026-07-03T18:00:00-04:00",
-            "venue": "Hard Rock Stadium, Miami Gardens",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 3,
-            "as": 2,
-            "pens": null,
-            "winner": "Argentina",
-            "feedsInto": "R16-7",
-            "feedsSide": "home"
-          },
-          {
-            "id": "R32-15",
-            "home": "Winner Group K",
-            "away": "Best 3rd (D/E/I/J/L)",
-            "homeTeam": "Colombia",
-            "awayTeam": "Ghana",
-            "kick": "Fri, Jul 3, 9:30 PM ET",
-            "iso": "2026-07-03T21:30:00-04:00",
-            "venue": "GEHA Field at Arrowhead Stadium, Kansas City",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 0,
-            "pens": null,
-            "winner": "Colombia",
-            "feedsInto": "R16-8",
-            "feedsSide": "away"
-          },
-          {
-            "id": "R32-16",
-            "home": "Runner-up Group D",
-            "away": "Runner-up Group G",
-            "homeTeam": "Australia",
-            "awayTeam": "Egypt",
-            "kick": "Fri, Jul 3, 2:00 PM ET",
-            "iso": "2026-07-03T14:00:00-04:00",
-            "venue": "AT&T Stadium, Arlington",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 1,
-            "pens": "2-4",
-            "winner": "Egypt",
-            "feedsInto": "R16-7",
-            "feedsSide": "away"
-          }
-        ]
-      },
       {
         "key": "r16",
         "label": "Round of 16",
         "matches": [
           {
             "id": "R16-1",
-            "home": "Winner R32-2",
-            "away": "Winner R32-5",
-            "homeTeam": "Paraguay",
-            "awayTeam": "France",
-            "kick": "Sat, Jul 4, 5:00 PM ET",
-            "iso": "2026-07-04T17:00:00-04:00",
-            "venue": "Lincoln Financial Field, Philadelphia",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 0,
-            "as": 1,
-            "pens": null,
-            "winner": "France",
+            "home": "Winner Group A",
+            "away": "Runner-up Group B",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "QF-1",
             "feedsSide": "home"
           },
           {
             "id": "R16-2",
-            "home": "Winner R32-1",
-            "away": "Winner R32-3",
-            "homeTeam": "Canada",
-            "awayTeam": "Morocco",
-            "kick": "Sat, Jul 4, 1:00 PM ET",
-            "iso": "2026-07-04T13:00:00-04:00",
-            "venue": "NRG Stadium, Houston",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 0,
-            "as": 3,
-            "pens": null,
-            "winner": "Morocco",
+            "home": "Winner Group C",
+            "away": "Runner-up Group D",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "QF-1",
             "feedsSide": "away"
           },
           {
             "id": "R16-3",
-            "home": "Winner R32-4",
-            "away": "Winner R32-6",
-            "homeTeam": "Brazil",
-            "awayTeam": "Norway",
-            "kick": "Sun, Jul 5, 4:00 PM ET",
-            "iso": "2026-07-05T16:00:00-04:00",
-            "venue": "MetLife Stadium, East Rutherford",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 2,
-            "pens": null,
-            "winner": "Norway",
-            "feedsInto": "QF-3",
+            "home": "Winner Group E",
+            "away": "Runner-up Group F",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
+            "feedsInto": "QF-2",
             "feedsSide": "home"
           },
           {
             "id": "R16-4",
-            "home": "Winner R32-7",
-            "away": "Winner R32-8",
-            "homeTeam": "Mexico",
-            "awayTeam": "England",
-            "kick": "Sun, Jul 5, 8:00 PM ET",
-            "iso": "2026-07-05T20:00:00-04:00",
-            "venue": "Estadio Banorte, Mexico City",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 2,
-            "as": 3,
-            "pens": null,
-            "winner": "England",
-            "feedsInto": "QF-3",
+            "home": "Winner Group G",
+            "away": "Runner-up Group H",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
+            "feedsInto": "QF-2",
             "feedsSide": "away"
           },
           {
             "id": "R16-5",
-            "home": "Winner R32-11",
-            "away": "Winner R32-12",
-            "homeTeam": "Portugal",
-            "awayTeam": "Spain",
-            "kick": "Mon, Jul 6, 3:00 PM ET",
-            "iso": "2026-07-06T15:00:00-04:00",
-            "venue": "AT&T Stadium, Arlington",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 0,
-            "as": 1,
-            "pens": null,
-            "winner": "Spain",
-            "feedsInto": "QF-2",
+            "home": "Winner Group B",
+            "away": "Runner-up Group A",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
+            "feedsInto": "QF-3",
             "feedsSide": "home"
           },
           {
             "id": "R16-6",
-            "home": "Winner R32-9",
-            "away": "Winner R32-10",
-            "homeTeam": "USA",
-            "awayTeam": "Belgium",
-            "kick": "Mon, Jul 6, 8:00 PM ET",
-            "iso": "2026-07-06T20:00:00-04:00",
-            "venue": "Lumen Field, Seattle",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 4,
-            "pens": null,
-            "winner": "Belgium",
-            "feedsInto": "QF-2",
+            "home": "Winner Group D",
+            "away": "Runner-up Group C",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
+            "feedsInto": "QF-3",
             "feedsSide": "away"
           },
           {
             "id": "R16-7",
-            "home": "Winner R32-14",
-            "away": "Winner R32-16",
-            "homeTeam": "Argentina",
-            "awayTeam": "Egypt",
-            "kick": "Tue, Jul 7, 12:00 PM ET",
-            "iso": "2026-07-07T12:00:00-04:00",
-            "venue": "Mercedes-Benz Stadium, Atlanta",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 3,
-            "as": 2,
-            "pens": null,
-            "winner": "Argentina",
+            "home": "Winner Group F",
+            "away": "Runner-up Group E",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "QF-4",
             "feedsSide": "home"
           },
           {
             "id": "R16-8",
-            "home": "Winner R32-13",
-            "away": "Winner R32-15",
-            "homeTeam": "Switzerland",
-            "awayTeam": "Colombia",
-            "kick": "Tue, Jul 7, 4:00 PM ET",
-            "iso": "2026-07-07T16:00:00-04:00",
-            "venue": "BC Place, Vancouver",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 0,
-            "as": 0,
-            "pens": "4-3",
-            "winner": "Switzerland",
+            "home": "Winner Group H",
+            "away": "Runner-up Group G",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "QF-4",
             "feedsSide": "away"
           }
@@ -2462,53 +2106,29 @@ const WC = {
             "id": "QF-1",
             "home": "Winner R16-1",
             "away": "Winner R16-2",
-            "homeTeam": "France",
-            "awayTeam": "Morocco",
-            "kick": "Thu, Jul 9, 4:00 PM ET",
-            "iso": "2026-07-09T16:00:00-04:00",
-            "venue": "Gillette Stadium, Foxborough",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 2,
-            "as": 0,
-            "pens": null,
-            "winner": "France",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "SF-1",
             "feedsSide": "home"
           },
           {
             "id": "QF-2",
-            "home": "Winner R16-5",
-            "away": "Winner R16-6",
-            "homeTeam": "Spain",
-            "awayTeam": "Belgium",
-            "kick": "Fri, Jul 10, 3:00 PM ET",
-            "iso": "2026-07-10T15:00:00-04:00",
-            "venue": "SoFi Stadium, Inglewood",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 2,
-            "as": 1,
-            "pens": null,
-            "winner": "Spain",
+            "home": "Winner R16-3",
+            "away": "Winner R16-4",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "SF-1",
             "feedsSide": "away"
           },
           {
             "id": "QF-3",
-            "home": "Winner R16-3",
-            "away": "Winner R16-4",
-            "homeTeam": "Norway",
-            "awayTeam": "England",
-            "kick": "Sat, Jul 11, 5:00 PM ET",
-            "iso": "2026-07-11T17:00:00-04:00",
-            "venue": "Hard Rock Stadium, Miami Gardens",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 2,
-            "pens": null,
-            "winner": "England",
+            "home": "Winner R16-5",
+            "away": "Winner R16-6",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "SF-2",
             "feedsSide": "home"
           },
@@ -2516,17 +2136,9 @@ const WC = {
             "id": "QF-4",
             "home": "Winner R16-7",
             "away": "Winner R16-8",
-            "homeTeam": "Argentina",
-            "awayTeam": "Switzerland",
-            "kick": "Sat, Jul 11, 9:00 PM ET",
-            "iso": "2026-07-11T21:00:00-04:00",
-            "venue": "GEHA Field at Arrowhead Stadium, Kansas City",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 3,
-            "as": 1,
-            "pens": null,
-            "winner": "Argentina",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "SF-2",
             "feedsSide": "away"
           }
@@ -2540,17 +2152,9 @@ const WC = {
             "id": "SF-1",
             "home": "Winner QF-1",
             "away": "Winner QF-2",
-            "homeTeam": "France",
-            "awayTeam": "Spain",
-            "kick": "Tue, Jul 14, 3:00 PM ET",
-            "iso": "2026-07-14T15:00:00-04:00",
-            "venue": "AT&T Stadium, Arlington",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 0,
-            "as": 2,
-            "pens": null,
-            "winner": "Spain",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "F-1",
             "feedsSide": "home"
           },
@@ -2558,17 +2162,9 @@ const WC = {
             "id": "SF-2",
             "home": "Winner QF-3",
             "away": "Winner QF-4",
-            "homeTeam": "England",
-            "awayTeam": "Argentina",
-            "kick": "Wed, Jul 15, 3:00 PM ET",
-            "iso": "2026-07-15T15:00:00-04:00",
-            "venue": "Mercedes-Benz Stadium, Atlanta",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 2,
-            "pens": null,
-            "winner": "Argentina",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": "F-1",
             "feedsSide": "away"
           }
@@ -2582,17 +2178,9 @@ const WC = {
             "id": "TP-1",
             "home": "Loser SF-1",
             "away": "Loser SF-2",
-            "homeTeam": "France",
-            "awayTeam": "England",
-            "kick": "Sat, Jul 18, 5:00 PM ET",
-            "iso": "2026-07-18T17:00:00-04:00",
-            "venue": "Hard Rock Stadium, Miami Gardens",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 4,
-            "as": 6,
-            "pens": null,
-            "winner": "England",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": null,
             "feedsSide": null
           }
@@ -2606,17 +2194,9 @@ const WC = {
             "id": "F-1",
             "home": "Winner SF-1",
             "away": "Winner SF-2",
-            "homeTeam": "Spain",
-            "awayTeam": "Argentina",
-            "kick": "Sun, Jul 19, 3:00 PM ET",
-            "iso": "2026-07-19T15:00:00-04:00",
-            "venue": "MetLife Stadium, East Rutherford",
-            "tv": "FOX",
-            "status": "final",
-            "hs": 1,
-            "as": 0,
-            "pens": null,
-            "winner": "Spain",
+            "homeTeam": null,
+            "awayTeam": null,
+            "status": "upcoming",
             "feedsInto": null,
             "feedsSide": null
           }
@@ -2657,15 +2237,17 @@ const noteEl = document.getElementById('bracket-note');
 let allSlots, byId, children, roundKey, finalId, thirdId, SF1, SF2, LEFT, RIGHT;
 
 if(!WCB.length){
-  if(noteEl) noteEl.textContent = "The bracket opens after the group stage.";
-  document.getElementById('bracket-mirror').innerHTML =
-    '<article class="bmatch" style="max-width:420px"><div class="bm-foot" style="padding:14px 16px;font-size:14px;color:var(--muted)">'+
-    'Bracket opens June 28 - check back after the group stage.</div></article>';
+  const msg = (WC.bracket && WC.bracket.note) || "The knockout bracket will appear here after the draw.";
+  if(noteEl) noteEl.textContent = msg;
+  const empty = '<article class="bmatch" style="max-width:460px"><div class="bm-foot" style="padding:14px 16px;font-size:14px;color:var(--muted)">'+esc(msg)+'</div></article>';
+  document.getElementById('bracket-mirror').innerHTML = empty;
+  // Also render into the per-round host so the message is visible on narrow
+  // screens (the mirror is display:none below 720px).
+  document.getElementById('bracket-rounds').innerHTML = empty;
 } else {
   if(noteEl){
-    noteEl.textContent = PHASE==="group"
-      ? "The knockout bracket fills in as groups finish. Round of 32 begins June 28. Group winners and runners-up appear as soon as a group is decided."
-      : "Winners advance through the tree; the two losing semi-finalists meet in the third-place play-off.";
+    noteEl.textContent = (WC.bracket && WC.bracket.note)
+      || "Winners advance through the tree; the two losing semi-finalists meet in the third-place play-off.";
   }
   buildShared();
   buildMirror();
@@ -2691,18 +2273,25 @@ function buildMirror(){
   const canvas = document.getElementById('bx-canvas');
   if(!canvas || !finalId || !SF1 || !SF2){ return; }
   const CW=144, CH=46, COLGAP=46, H=496, PADX=14, PADTOP=22;
-  const COL={ L:{r32:0,r16:1,qf:2,sf:3}, C:{final:4}, R:{sf:5,qf:6,r16:7,r32:8} };
-  const N={r32:8,r16:4,qf:2,sf:1};
+  // Column layout is derived from whichever knockout rounds are present (outer ->
+  // inner), so this renders both a 48-team men's bracket (Round of 32 first) and
+  // a 32-team women's bracket (Round of 16 first) without hard-coding either.
+  const koRounds = WCB.map(r=>r.key).filter(k=>k!=='final' && k!=='third');
+  const nCols = koRounds.length*2 + 1;                       // both sides + the final column
+  const COL={ L:{}, C:{final:koRounds.length}, R:{} };
+  koRounds.forEach((k,i)=>{ COL.L[k]=i; COL.R[k]=nCols-1-i; });
+  const N={}; koRounds.forEach(k=>{ N[k]=((LEFT[k]||[]).length)||((RIGHT[k]||[]).length)||1; });
+  const LABEL={r32:'Round of 32', r16:'Round of 16', qf:'Quarter-finals', sf:'Semi-finals', final:'Final'};
   const colX=c=>PADX+c*(CW+COLGAP);
   const yC=(i,n)=>PADTOP+(i+0.5)/n*H;
   const pos={};
-  ['r32','r16','qf','sf'].forEach(rk=>{
+  koRounds.forEach(rk=>{
     (LEFT[rk]||[]).forEach((id,i)=>pos[id]={x:colX(COL.L[rk]),y:yC(i,N[rk])});
     (RIGHT[rk]||[]).forEach((id,i)=>pos[id]={x:colX(COL.R[rk]),y:yC(i,N[rk])});
   });
   pos[finalId]={x:colX(COL.C.final),y:PADTOP+H/2};
   if(thirdId) pos[thirdId]={x:colX(COL.C.final),y:PADTOP+H+50};
-  const totalW=colX(8)+CW+PADX, totalH=PADTOP+H+(thirdId?86:20);
+  const totalW=colX(nCols-1)+CW+PADX, totalH=PADTOP+H+(thirdId?86:20);
 
   function mrow(team,desc,win,los,score){
     const resolved=!!team; const cls=['bx-row'];
@@ -2725,7 +2314,9 @@ function buildMirror(){
   }
   const ln=d=>'<path d="'+d+'" fill="none" stroke="var(--hairline-strong)" stroke-width="1.4"/>';
   let paths='';
-  ['r16','qf','sf'].forEach(rk=>{
+  // Draw each slot's connectors to its two feeder children. The outermost round
+  // has no bracket feeders (fed by the groups), so it is skipped by the guard.
+  koRounds.forEach(rk=>{
     (LEFT[rk]||[]).forEach(id=>{ const c=children[id]; if(!c||!pos[c.home]||!pos[c.away])return;
       const D=pos[id],Fh=pos[c.home],Fa=pos[c.away],sp=(Fh.x+CW+D.x)/2;
       paths+=ln('M'+(Fh.x+CW)+' '+Fh.y+' H'+sp)+ln('M'+(Fa.x+CW)+' '+Fa.y+' H'+sp)+ln('M'+sp+' '+Fh.y+' V'+Fa.y)+ln('M'+sp+' '+D.y+' H'+D.x); });
@@ -2736,8 +2327,11 @@ function buildMirror(){
   const F=pos[finalId],s1=pos[SF1],s2=pos[SF2];
   paths+=ln('M'+(s1.x+CW)+' '+s1.y+' H'+F.x)+ln('M'+s2.x+' '+s2.y+' H'+(F.x+CW));
   const conn='<svg class="bx-conn" width="'+totalW+'" height="'+totalH+'" aria-hidden="true">'+paths+'</svg>';
-  const hdrs=[['Round of 32',COL.L.r32],['Round of 16',COL.L.r16],['Quarter-finals',COL.L.qf],['Semi-finals',COL.L.sf],['Final',COL.C.final],['Semi-finals',COL.R.sf],['Quarter-finals',COL.R.qf],['Round of 16',COL.R.r16],['Round of 32',COL.R.r32]]
-    .map(l=>'<div class="bx-col-h" style="left:'+colX(l[1])+'px;width:'+CW+'px">'+l[0]+'</div>').join('');
+  const hdrDefs=[];
+  koRounds.forEach(k=>hdrDefs.push([LABEL[k]||k, COL.L[k]]));
+  hdrDefs.push(['Final', COL.C.final]);
+  koRounds.slice().reverse().forEach(k=>hdrDefs.push([LABEL[k]||k, COL.R[k]]));
+  const hdrs=hdrDefs.map(l=>'<div class="bx-col-h" style="left:'+colX(l[1])+'px;width:'+CW+'px">'+l[0]+'</div>').join('');
   canvas.style.width=totalW+'px'; canvas.style.height=totalH+'px';
   canvas.innerHTML=conn+hdrs+allSlots.map(mcard).join('');
 }
@@ -2755,14 +2349,16 @@ function renderRow(team, descriptor, isWinner, isLoser, score){
 function renderMatch(m){
   const fin=m.status==="final";
   const hw=fin&&m.winner===m.homeTeam, aw=fin&&m.winner===m.awayTeam;
-  const state=fin?'<span class="bm-state final">Full time</span>':'<span class="bm-state upcoming">'+esc(m.kick||"")+'</span>';
+  // No kickoff label until the schedule exists; omit the badge rather than show an empty pill.
+  const state=fin?'<span class="bm-state final">Full time</span>':(m.kick?'<span class="bm-state upcoming">'+esc(m.kick)+'</span>':'');
   const pens=(fin&&m.pens)?' &middot; won '+esc(m.pens)+' on penalties':'';
   const idlbl=(m.id===thirdId?'Third place':(m.id===finalId?'Final':esc(m.id)));
+  const footTxt=esc(m.venue||"")+(m.tv?' &middot; '+esc(m.tv):'')+pens;
   return '<article class="bmatch" data-status="'+esc(m.status)+'">'+
     '<div class="bm-head"><span class="bm-id">'+idlbl+'</span>'+state+'</div>'+
     renderRow(m.homeTeam,m.home,hw,fin&&!hw,fin?m.hs:null)+
     renderRow(m.awayTeam,m.away,aw,fin&&!aw,fin?m.as:null)+
-    '<div class="bm-foot">'+esc(m.venue||"")+(m.tv?' &middot; '+esc(m.tv):'')+pens+'</div>'+
+    (footTxt?'<div class="bm-foot">'+footTxt+'</div>':'')+
   '</article>';
 }
 function earliestUnfinished(){
