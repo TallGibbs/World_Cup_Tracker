@@ -273,6 +273,15 @@ if (WC) {
     const knownTeams = new Set();
     for (const g of (WC.groupsFinal || WC.groups || [])) for (const r of (g.rows || [])) knownTeams.add(r.team);
 
+    // A "pending" bracket is the pre-draw shape of a future tournament: the tree
+    // structure and slot descriptors exist, but no teams are drawn and no match
+    // schedule is published, so per-match iso/venue/tv are not yet required and
+    // every slot must be empty and upcoming. (Used for the empty 2027 women's
+    // bracket shown between tournaments.)
+    const bracketPending = WC.bracket.pending === true;
+    if (WC.bracket.pending != null && typeof WC.bracket.pending !== 'boolean')
+      fail('WC.bracket.pending must be a boolean when present');
+
     if (typeof WC.bracket.source !== 'string' || !WC.bracket.source.trim())
       fail('WC.bracket.source must be a non-empty named structured source string');
     if (!Array.isArray(WC.bracket.rounds)) fail('WC.bracket.rounds must be an array');
@@ -290,10 +299,20 @@ if (WC) {
         if (seenIds.has(m.id)) fail(`WC.bracket: duplicate match id "${m.id}"`);
         seenIds.add(m.id);
 
-        for (const k of ['home', 'away', 'iso', 'venue', 'tv', 'status'])
+        const reqKeys = bracketPending
+          ? ['home', 'away', 'status']                              // pre-draw: no schedule yet
+          : ['home', 'away', 'iso', 'venue', 'tv', 'status'];
+        for (const k of reqKeys)
           if (m[k] == null || m[k] === '') fail(`WC.bracket ${m.id}: missing "${k}"`);
         if (m.status !== 'upcoming' && m.status !== 'final')
           fail(`WC.bracket ${m.id}: status must be "upcoming" or "final" (got "${m.status}")`);
+
+        if (bracketPending) {
+          if (m.status !== 'upcoming')
+            fail(`WC.bracket ${m.id}: a pending bracket holds only upcoming matches (got "${m.status}")`);
+          if ((m.homeTeam != null && m.homeTeam !== '') || (m.awayTeam != null && m.awayTeam !== ''))
+            fail(`WC.bracket ${m.id}: a pending bracket must have empty homeTeam/awayTeam (the draw has not been made)`);
+        }
 
         for (const side of ['homeTeam', 'awayTeam'])
           if (m[side] != null && m[side] !== '' && !knownTeams.has(m[side]))

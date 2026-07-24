@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>World Cup Tracker - Men's 2026 Bracket</title>
+<title>World Cup Tracker - Women's 2027 Bracket</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -414,7 +414,7 @@
 
   <div class="legend">
     <span class="k"><span class="sw" style="background:var(--qual)"></span> Winner advances</span>
-    <span class="k"><span class="sw" style="background:var(--third)"></span> Best third-placed entrant</span>
+    <span class="k" style="color:var(--faint)">Slots show group positions until the December 2026 draw.</span>
     <span class="k" style="color:var(--faint)">Scroll sideways to follow each side of the draw to the Final.</span>
   </div>
 
@@ -426,7 +426,7 @@
   <section aria-label="Knockout bracket by round" class="bracket-rounds" id="bracket-rounds"></section>
 
   <div class="footer">
-    <span>Times shown in <b>ET</b>. Single elimination &middot; winners advance; the two losing semi-finalists meet in the third-place play-off.</span>
+    <span>Teams, kickoff times and venues are set after the <b>December 2026 draw</b> and the FIFA match schedule. Single elimination; the two losing semi-finalists meet in the third-place play-off.</span>
     <span id="updated"></span>
   </div>
 
@@ -464,15 +464,17 @@ const noteEl = document.getElementById('bracket-note');
 let allSlots, byId, children, roundKey, finalId, thirdId, SF1, SF2, LEFT, RIGHT;
 
 if(!WCB.length){
-  if(noteEl) noteEl.textContent = "The bracket opens after the group stage.";
-  document.getElementById('bracket-mirror').innerHTML =
-    '<article class="bmatch" style="max-width:420px"><div class="bm-foot" style="padding:14px 16px;font-size:14px;color:var(--muted)">'+
-    'Bracket opens June 28 - check back after the group stage.</div></article>';
+  const msg = (WC.bracket && WC.bracket.note) || "The knockout bracket will appear here after the draw.";
+  if(noteEl) noteEl.textContent = msg;
+  const empty = '<article class="bmatch" style="max-width:460px"><div class="bm-foot" style="padding:14px 16px;font-size:14px;color:var(--muted)">'+esc(msg)+'</div></article>';
+  document.getElementById('bracket-mirror').innerHTML = empty;
+  // Also render into the per-round host so the message is visible on narrow
+  // screens (the mirror is display:none below 720px).
+  document.getElementById('bracket-rounds').innerHTML = empty;
 } else {
   if(noteEl){
-    noteEl.textContent = PHASE==="group"
-      ? "The knockout bracket fills in as groups finish. Round of 32 begins June 28. Group winners and runners-up appear as soon as a group is decided."
-      : "Winners advance through the tree; the two losing semi-finalists meet in the third-place play-off.";
+    noteEl.textContent = (WC.bracket && WC.bracket.note)
+      || "Winners advance through the tree; the two losing semi-finalists meet in the third-place play-off.";
   }
   buildShared();
   buildMirror();
@@ -498,18 +500,25 @@ function buildMirror(){
   const canvas = document.getElementById('bx-canvas');
   if(!canvas || !finalId || !SF1 || !SF2){ return; }
   const CW=144, CH=46, COLGAP=46, H=496, PADX=14, PADTOP=22;
-  const COL={ L:{r32:0,r16:1,qf:2,sf:3}, C:{final:4}, R:{sf:5,qf:6,r16:7,r32:8} };
-  const N={r32:8,r16:4,qf:2,sf:1};
+  // Column layout is derived from whichever knockout rounds are present (outer ->
+  // inner), so this renders both a 48-team men's bracket (Round of 32 first) and
+  // a 32-team women's bracket (Round of 16 first) without hard-coding either.
+  const koRounds = WCB.map(r=>r.key).filter(k=>k!=='final' && k!=='third');
+  const nCols = koRounds.length*2 + 1;                       // both sides + the final column
+  const COL={ L:{}, C:{final:koRounds.length}, R:{} };
+  koRounds.forEach((k,i)=>{ COL.L[k]=i; COL.R[k]=nCols-1-i; });
+  const N={}; koRounds.forEach(k=>{ N[k]=((LEFT[k]||[]).length)||((RIGHT[k]||[]).length)||1; });
+  const LABEL={r32:'Round of 32', r16:'Round of 16', qf:'Quarter-finals', sf:'Semi-finals', final:'Final'};
   const colX=c=>PADX+c*(CW+COLGAP);
   const yC=(i,n)=>PADTOP+(i+0.5)/n*H;
   const pos={};
-  ['r32','r16','qf','sf'].forEach(rk=>{
+  koRounds.forEach(rk=>{
     (LEFT[rk]||[]).forEach((id,i)=>pos[id]={x:colX(COL.L[rk]),y:yC(i,N[rk])});
     (RIGHT[rk]||[]).forEach((id,i)=>pos[id]={x:colX(COL.R[rk]),y:yC(i,N[rk])});
   });
   pos[finalId]={x:colX(COL.C.final),y:PADTOP+H/2};
   if(thirdId) pos[thirdId]={x:colX(COL.C.final),y:PADTOP+H+50};
-  const totalW=colX(8)+CW+PADX, totalH=PADTOP+H+(thirdId?86:20);
+  const totalW=colX(nCols-1)+CW+PADX, totalH=PADTOP+H+(thirdId?86:20);
 
   function mrow(team,desc,win,los,score){
     const resolved=!!team; const cls=['bx-row'];
@@ -532,7 +541,9 @@ function buildMirror(){
   }
   const ln=d=>'<path d="'+d+'" fill="none" stroke="var(--hairline-strong)" stroke-width="1.4"/>';
   let paths='';
-  ['r16','qf','sf'].forEach(rk=>{
+  // Draw each slot's connectors to its two feeder children. The outermost round
+  // has no bracket feeders (fed by the groups), so it is skipped by the guard.
+  koRounds.forEach(rk=>{
     (LEFT[rk]||[]).forEach(id=>{ const c=children[id]; if(!c||!pos[c.home]||!pos[c.away])return;
       const D=pos[id],Fh=pos[c.home],Fa=pos[c.away],sp=(Fh.x+CW+D.x)/2;
       paths+=ln('M'+(Fh.x+CW)+' '+Fh.y+' H'+sp)+ln('M'+(Fa.x+CW)+' '+Fa.y+' H'+sp)+ln('M'+sp+' '+Fh.y+' V'+Fa.y)+ln('M'+sp+' '+D.y+' H'+D.x); });
@@ -543,8 +554,11 @@ function buildMirror(){
   const F=pos[finalId],s1=pos[SF1],s2=pos[SF2];
   paths+=ln('M'+(s1.x+CW)+' '+s1.y+' H'+F.x)+ln('M'+s2.x+' '+s2.y+' H'+(F.x+CW));
   const conn='<svg class="bx-conn" width="'+totalW+'" height="'+totalH+'" aria-hidden="true">'+paths+'</svg>';
-  const hdrs=[['Round of 32',COL.L.r32],['Round of 16',COL.L.r16],['Quarter-finals',COL.L.qf],['Semi-finals',COL.L.sf],['Final',COL.C.final],['Semi-finals',COL.R.sf],['Quarter-finals',COL.R.qf],['Round of 16',COL.R.r16],['Round of 32',COL.R.r32]]
-    .map(l=>'<div class="bx-col-h" style="left:'+colX(l[1])+'px;width:'+CW+'px">'+l[0]+'</div>').join('');
+  const hdrDefs=[];
+  koRounds.forEach(k=>hdrDefs.push([LABEL[k]||k, COL.L[k]]));
+  hdrDefs.push(['Final', COL.C.final]);
+  koRounds.slice().reverse().forEach(k=>hdrDefs.push([LABEL[k]||k, COL.R[k]]));
+  const hdrs=hdrDefs.map(l=>'<div class="bx-col-h" style="left:'+colX(l[1])+'px;width:'+CW+'px">'+l[0]+'</div>').join('');
   canvas.style.width=totalW+'px'; canvas.style.height=totalH+'px';
   canvas.innerHTML=conn+hdrs+allSlots.map(mcard).join('');
 }
@@ -562,14 +576,16 @@ function renderRow(team, descriptor, isWinner, isLoser, score){
 function renderMatch(m){
   const fin=m.status==="final";
   const hw=fin&&m.winner===m.homeTeam, aw=fin&&m.winner===m.awayTeam;
-  const state=fin?'<span class="bm-state final">Full time</span>':'<span class="bm-state upcoming">'+esc(m.kick||"")+'</span>';
+  // No kickoff label until the schedule exists; omit the badge rather than show an empty pill.
+  const state=fin?'<span class="bm-state final">Full time</span>':(m.kick?'<span class="bm-state upcoming">'+esc(m.kick)+'</span>':'');
   const pens=(fin&&m.pens)?' &middot; won '+esc(m.pens)+' on penalties':'';
   const idlbl=(m.id===thirdId?'Third place':(m.id===finalId?'Final':esc(m.id)));
+  const footTxt=esc(m.venue||"")+(m.tv?' &middot; '+esc(m.tv):'')+pens;
   return '<article class="bmatch" data-status="'+esc(m.status)+'">'+
     '<div class="bm-head"><span class="bm-id">'+idlbl+'</span>'+state+'</div>'+
     renderRow(m.homeTeam,m.home,hw,fin&&!hw,fin?m.hs:null)+
     renderRow(m.awayTeam,m.away,aw,fin&&!aw,fin?m.as:null)+
-    '<div class="bm-foot">'+esc(m.venue||"")+(m.tv?' &middot; '+esc(m.tv):'')+pens+'</div>'+
+    (footTxt?'<div class="bm-foot">'+footTxt+'</div>':'')+
   '</article>';
 }
 function earliestUnfinished(){
