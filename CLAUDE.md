@@ -433,23 +433,35 @@ and `schedNote`. **That is the current, correct state.**
 ## Knockout bracket (`WC.bracket`)
 
 `bracket.html` renders the knockout tree from `WC.bracket`. Each match slot has a
-descriptor (`home`/`away`, e.g. `"Winner Group D"` or `"Best third-placed team"`)
-and a resolved team (`homeTeam`/`awayTeam`, `null` until known), plus `status`,
-`hs`/`as`/`pens`/`winner`, and `feedsInto`/`feedsSide` linking it to the next
-round. The descriptors and the schedule are fixed by the official match schedule.
+descriptor (`home`/`away`, e.g. `"Winner Group D"`) and a resolved team
+(`homeTeam`/`awayTeam`, `null` until known), plus `status`, `hs`/`as`/`pens`/
+`winner`, and `feedsInto`/`feedsSide` linking it to the next round.
 
-**The 2026 bracket is complete and final. Do not edit it.** The instructions
-below apply once a tournament is live again:
+**Current state: an empty, pre-draw 2027 women's bracket.** `WC.bracket` now
+holds the 32-team knockout shape (Round of 16 -> Quarter-finals -> Semi-finals ->
+Final, plus the third-place play-off) with `"pending": true`. Every slot is a
+group descriptor with `homeTeam`/`awayTeam` `null`, every match `upcoming`, and no
+`iso`/`venue`/`tv` (the draw is December 2026 and the schedule is unpublished).
+While a bracket is `pending` the validator relaxes the per-match schedule
+requirement but still enforces the tree structure, the wiring, and that every slot
+is empty. `bracket.html`'s desktop tree renderer derives its columns from whichever
+rounds are present, so it draws this Round-of-16-first tree as well as a men's
+Round-of-32 tree - no renderer change is needed to switch formats. The hero note is
+read from `WC.bracket.note`. The finished **men's 2026 bracket is preserved in the
+dated snapshots** (`snapshots/world_cup_bracket_2026-07-22.html`, linked from the
+recap); do not resurrect it into live `data.js`.
+
+**When the December 2026 draw and schedule land (Phase 1):** set `pending:false`,
+resolve each group descriptor into the drawn team, and add each match's real
+`iso`/`venue`/`tv`. Then the instructions below (written for the men's run) apply
+again - with the women's round keys (`r16` is the first round; there is no `r32`,
+and no best-third-placed slots, since only the top two of each group advance):
 
 - **Resolve every slot whose feeder is now decided** (and only from the same
   structured tier sources used for the tracker - never from a web/AI summary):
   - A `Winner Group X` / `Runner-up Group X` slot: fill it the moment Group X is
     complete (all four teams have played 3).
-  - A best-third-placed slot: these depend on the FIFA combination table, which
-    needs the **full set** of qualified third-placed teams, so they can only be
-    filled **after all groups are complete**. Leaving them `null` until then is
-    correct, not a bug.
-  - A knockout-fed slot (`Winner R32-9`, ...): fill it with the feeding match's
+  - A knockout-fed slot (`Winner R16-1`, ...): fill it with the feeding match's
     `winner` the moment that match is `final`.
 - **Record finished knockout matches:** set `status:"final"`, integer `hs`/`as`,
   `winner`, and (only when the 90/120-minute score was level) a `pens` string
@@ -460,12 +472,3 @@ below apply once a tournament is live again:
 `node scripts/validate.mjs` enforces this mechanically: it fails if a slot whose
 group is complete is empty or wrong, and it checks the winner/score/penalty/
 advancement math. A knowable opponent left blank will not pass silently.
-
-**Two things to fix before the 2027 bracket exists** (`docs/ROADMAP.md` 1.10):
-
-- `bracket.html`'s empty state writes its card into `#bracket-mirror`, which is
-  `display:none` below 720px - so with no bracket data the page renders
-  **nothing at all on a phone**.
-- The 2027 tournament has 32 teams, so its bracket starts at the Round of 16, not
-  the Round of 32. The round keys, the `ROUND_SIZE` map in the validator, and the
-  best-third-placed logic all change.
