@@ -210,6 +210,40 @@
   .empty{background:var(--card);border:1px solid var(--hairline);border-radius:var(--radius);
     box-shadow:var(--shadow);padding:26px 20px;color:var(--muted);font-size:15px;}
 
+  /* ---------- Road to 2027 (interim /today mode; toggled by WC.today.mode) ---------- */
+  .rm-block{background:var(--card);border:1px solid var(--hairline);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:18px 20px 20px;}
+  .rm-h{font-family:'Barlow Condensed','Barlow',sans-serif;text-transform:uppercase;
+    letter-spacing:.09em;font-weight:600;font-size:12px;color:var(--faint);margin:0 0 14px;}
+  .rm-routes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .rm-route{display:flex;flex-direction:column;gap:6px;}
+  .rr-top{display:flex;align-items:center;gap:10px;}
+  .rr-kit{width:7px;height:28px;border-radius:3px;flex:none;}
+  .rr-name{font-family:'Barlow Condensed','Barlow',sans-serif;font-weight:700;font-size:20px;}
+  .rr-confed{margin-left:auto;font-size:11px;color:var(--faint);text-transform:uppercase;
+    letter-spacing:.07em;font-family:'Barlow Condensed','Barlow',sans-serif;}
+  .rr-route{font-size:12.5px;color:var(--muted);font-weight:600;}
+  .rr-detail{font-size:13px;color:var(--muted);line-height:1.45;}
+  .rm-time{list-style:none;margin:0;padding:0;}
+  .rm-time li{display:grid;grid-template-columns:158px 1fr;gap:14px;padding:11px 8px;border-top:1px solid #EEF2F6;}
+  .rm-time li:first-child{border-top:0;}
+  .rm-time li.rt-featured{background:rgba(233,185,73,.07);border-radius:8px;}
+  .rt-when{font-family:'Barlow Condensed','Barlow',sans-serif;font-weight:700;font-size:14px;color:var(--ink);}
+  .rt-featured .rt-when{color:#A9791A;}
+  .rt-event{font-weight:600;}
+  .rt-detail{color:var(--muted);font-size:13px;margin-top:2px;line-height:1.4;}
+  .rm-slots{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .rm-slots td{padding:9px 6px;border-top:1px solid #EEF2F6;}
+  .rm-slots tr:first-child td{border-top:0;}
+  .rs-confed{font-weight:600;}
+  .rs-direct{text-align:right;font-family:'Barlow Condensed','Barlow',sans-serif;font-weight:700;white-space:nowrap;}
+  .rs-po{text-align:right;color:var(--muted);font-size:12.5px;white-space:nowrap;}
+  .rm-note{color:var(--faint);font-size:12.5px;line-height:1.5;margin:2px 2px 0;}
+  @media (max-width:760px){
+    .rm-routes{grid-template-columns:1fr;}
+    .rm-time li{grid-template-columns:1fr;gap:3px;}
+  }
+
   @media (max-width:880px){ .hero h1{font-size:34px;} }
   @media (prefers-reduced-motion:no-preference){
     .live-dot{animation:pulse 1.8s infinite;}
@@ -242,7 +276,7 @@
 
   <section aria-label="Today's matches">
     <div class="section-head">
-      <h2>Match schedule</h2>
+      <h2 id="sched-h">Match schedule</h2>
       <span class="note" id="sched-note"></span>
     </div>
     <div class="games" id="games"></div>
@@ -277,12 +311,20 @@ function el(html){const d=document.createElement('div');d.innerHTML=html.trim();
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function kitFor(name){return (TODAY.kits&&TODAY.kits[name])||"var(--hairline-strong)";}
 
-/* ---- header text ---- */
-document.getElementById('t-stage').textContent = TODAY.stageLabel;
-document.getElementById('t-date').textContent  = TODAY.date;
-document.getElementById('t-tz').innerHTML       = esc(TODAY.tz);
-document.getElementById('sched-note').textContent = TODAY.schedNote;
+/* ---- header text (the "Refreshed" line shows in both modes) ---- */
 document.getElementById('updated').innerHTML   = "Refreshed <b>"+esc(WC.meta.updated)+"</b>";
+if(TODAY.mode!=='roadmap'){
+  document.getElementById('t-stage').textContent = TODAY.stageLabel;
+  document.getElementById('t-date').textContent  = TODAY.date;
+  document.getElementById('t-tz').innerHTML       = esc(TODAY.tz);
+  document.getElementById('sched-note').textContent = TODAY.schedNote;
+}
+
+/* The /today destination is repurposed between tournaments; keep every page's
+   nav label honest by following WC.today.mode (falls back to "Today's Games"). */
+if(TODAY.mode==='roadmap'){
+  document.querySelectorAll('a[href="/today"]').forEach(a=>{a.textContent='Road to 2027';});
+}
 
 /* ---- which game is "next up" (first that hasn't kicked off) ---- */
 function statusFor(iso){
@@ -381,9 +423,65 @@ function renderGames(){
   });
 }
 
-renderGames();
-/* keep the live / next-up badges fresh as the day rolls on */
-setInterval(renderGames, 60000);
+/* ---- Road to 2027 renderer (interim mode). Reads WC.roadTo2027 and fills the
+   same hero + list containers the games renderer uses, so no markup is added or
+   removed - the page just renders different content. renderGames() above is left
+   completely intact, so flipping WC.today.mode back to "games" restores the live
+   Today's Games feature with no code change. ---- */
+function renderRoadmap(){
+  const RM = WC.roadTo2027 || {};
+  document.title = "World Cup Tracker - Road to 2027";
+  document.getElementById('t-title').innerHTML =
+    esc(RM.heading||'Road to 2027') + (RM.tag?'<span class="stage-tag">'+esc(RM.tag)+'</span>':'');
+  document.getElementById('t-date').textContent = RM.intro || '';
+  document.getElementById('t-tz').textContent   = RM.draw  || '';
+  const h2 = document.getElementById('sched-h'); if(h2) h2.textContent = 'Qualifying';
+  const sn = document.getElementById('sched-note'); if(sn) sn.textContent = "The road to the 2027 FIFA Women's World Cup in Brazil";
+  const legend = document.querySelector('.legend'); if(legend) legend.style.display = 'none';
+  const foot = document.querySelector('.footer span'); if(foot)
+    foot.innerHTML = 'Confirmed qualifying windows; the final draw and the exact match calendar are still to be published. See the <a href="/">tracker</a> for the 2026 recap and the countdown.';
+
+  const routes = (RM.featured||[]).map(f=>
+    '<div class="rm-route"><div class="rr-top">'+
+      '<span class="rr-kit" style="background:'+esc(f.color||'var(--hairline-strong)')+'"></span>'+
+      '<span class="rr-name">'+esc(f.team)+'</span>'+
+      '<span class="rr-confed">'+esc(f.confed||'')+'</span></div>'+
+      (f.route?'<div class="rr-route">'+esc(f.route)+'</div>':'')+
+      '<div class="rr-detail">'+esc(f.detail||'')+'</div>'+
+    '</div>').join('');
+
+  const timeline = (RM.timeline||[]).map(t=>
+    '<li class="'+(t.featured?'rt-featured':'')+'">'+
+      '<span class="rt-when">'+esc(t.window)+'</span>'+
+      '<span><span class="rt-event">'+esc(t.event)+'</span>'+
+        (t.detail?'<div class="rt-detail">'+esc(t.detail)+'</div>':'')+'</span>'+
+    '</li>').join('');
+
+  const slotRows = ((RM.slots&&RM.slots.rows)||[]).map(r=>
+    '<tr><td class="rs-confed">'+esc(r.confed)+'</td>'+
+      '<td class="rs-direct">'+esc(r.direct||'')+'</td>'+
+      '<td class="rs-po">'+esc(r.po||'')+'</td></tr>').join('');
+
+  const wrap = document.getElementById('games');
+  wrap.innerHTML =
+    '<div class="rm-block"><div class="rm-h">Our featured teams</div>'+
+      '<div class="rm-routes">'+routes+'</div></div>'+
+    '<div class="rm-block"><div class="rm-h">Qualifying calendar</div>'+
+      '<ul class="rm-time">'+timeline+'</ul></div>'+
+    (slotRows?('<div class="rm-block"><div class="rm-h">How the 32 places are filled</div>'+
+      '<table class="rm-slots"><tbody>'+slotRows+'</tbody></table>'+
+      ((RM.slots&&RM.slots.note)?'<p class="rm-note" style="margin-top:13px">'+esc(RM.slots.note)+'</p>':'')+
+      '</div>'):'')+
+    (RM.liveNote?'<p class="rm-note">'+esc(RM.liveNote)+'</p>':'');
+}
+
+if(TODAY.mode==='roadmap'){
+  renderRoadmap();
+} else {
+  renderGames();
+  /* keep the live / next-up badges fresh as the day rolls on */
+  setInterval(renderGames, 60000);
+}
 
 /* ---- sticky nav: mobile menu toggle ---- */
 (function(){

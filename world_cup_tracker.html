@@ -481,6 +481,12 @@
    ========================================================================= */
 const DATA = WC;
 
+/* The /today destination is repurposed between tournaments; keep its nav label
+   honest by following WC.today.mode (falls back to the static "Today's Games"). */
+if(WC.today && WC.today.mode==='roadmap'){
+  document.querySelectorAll('a[href="/today"]').forEach(a=>{a.textContent='Road to 2027';});
+}
+
 /* =========================== rendering =========================== */
 const FAVS = DATA.teams.map(t=>t.name);
 const FAV_GROUPS = DATA.teams.map(t=>t.group);

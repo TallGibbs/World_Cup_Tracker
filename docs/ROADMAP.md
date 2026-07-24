@@ -117,6 +117,32 @@ kickoff. **This is a deliberate, labelled approximation, not an invented
 kickoff time.** Replace it with the real opening-match time the moment FIFA
 publishes the schedule (see Phase 1.1).
 
+### Qualifying-window research (2026-07-24)
+
+A deep-research pass, cross-checked against the ESPN structured API directly,
+established the road to Brazil and the data-source picture (feeds the `/today`
+Road-to-2027 page and Phase 1):
+
+- **32 slots:** 29 direct (UEFA 11, AFC 6, CAF 4, CONCACAF 4, CONMEBOL 3 incl.
+  host Brazil, OFC 1) + 3 via a 10-team inter-confederation play-off (prelim
+  Nov-Dec 2026, final Feb 2027). Brazil is the only automatic qualifier.
+- **In-window qualifying is concentrated Oct 2026-Feb 2027**, then a quiet
+  Mar-Jun 2027 run-in. Key windows: UEFA play-offs 9-13 Oct and late Nov-early
+  Dec 2026; CONCACAF W Championship knockouts 27 Nov-5 Dec 2026; the
+  inter-confederation play-offs. **Final draw expected Dec 2026, not yet
+  officially scheduled** - so no group bracket exists to build until then.
+- **Featured nations' women's routes:** USA -> CONCACAF W Championship (Nov-Dec
+  2026); England & Netherlands -> UEFA qualifiers (league phase done Jun 2026,
+  play-offs Oct-Dec 2026).
+- **Data feasibility (the constraint on any live view):** ESPN's site API carries
+  the UEFA women's qualifiers (`fifa.wworldq.uefa`, league 20649) and the
+  `concacaf.womens.championship` (league 18969) - so **all three featured
+  nations' routes are available** from a free structured source, parsed the same
+  way as the men's data. football-data.org and API-Football carry **no** women's
+  WC qualifiers. AFC/CAF/CONMEBOL/OFC women's qualifier slugs were not found on
+  ESPN, so an all-six-confederation live view is not currently guaranteed. Full
+  detail is in the `wwc2027-data-sources` memory.
+
 ---
 
 ## Phase 1 - after the 2027 draw (expected late 2026)
@@ -130,7 +156,7 @@ weekly run is a light-touch refresh (see "The weekly run" in `CLAUDE.md`).
 | 1.2 | Archive the men's data: move `WC.groups` / `WC.groupsFinal` / `WC.bracket` / `WC.teams` into an archive shape (see "Cutover design" below) and rebuild them for 2027 |
 | 1.3 | Rebuild `WC.meta` for the women's tournament (`tournament`, `host`, `stage`, `phase: "group"`, `where`, `standNote`) |
 | 1.4 | Choose the new featured teams for `WC.teams` (USA, Netherlands and England all qualify as women's sides too - confirm with the owner) |
-| 1.5 | Rebuild `WC.today` for live matchdays; restore `/today` to its real job |
+| 1.5 | Rebuild `WC.today` for live matchdays; restore `/today` to its real job by flipping `WC.today.mode` back to `"games"` (the `renderGames()` path is preserved) |
 | 1.6 | Rebuild `WC.bracket` for the 2027 knockout format (32 teams -> Round of 16, **not** the men's 48-team Round of 32; the round keys, `ROUND_SIZE` map and the best-third-placed logic in `validate.mjs` all change) |
 | 1.7 | Confirm which structured source carries the 2027 tournament (ESPN `fifa.wwc` should light up once the season exists) and update the tier list in `CLAUDE.md` |
 | 1.8 | Decide the cadence for the tournament itself - daily during June-July 2027, weekly the rest of the time |
@@ -195,15 +221,15 @@ should re-check whether any has become answerable.
    visual treatment for the 2027 side of the page? Currently it reuses the
    existing gold-on-navy hero.
 
-5. **What happens to `/today` during the interim?** A page headed "Today's
-   Games" is actively misleading under a weekly cadence: between runs it shows a
-   date up to six days old. *Implemented in Phase 0:* the URL stays alive (no
-   404, existing links and the nav keep working), `WC.today.games` stays `[]` so
-   it renders its tidy "no matches" card, and `stageLabel` / `schedNote` say the
-   tournament is complete and point at the countdown. **Open:** should `/today`
-   be dropped from the nav entirely until 2027? *Recommendation: keep it* - it
-   costs nothing, the URL stays warm, and hiding it means editing all three
-   pages twice.
+5. **What happens to `/today` during the interim?** *Resolved (Phase 0.5,
+   2026-07-24):* `/today` is repurposed into a **"Road to 2027"** page - featured
+   nations' qualifying routes, a dated qualifying calendar, and the 32-slot
+   allocation - rendered from a new `WC.roadTo2027` object. The switch is a single
+   field, `WC.today.mode` (`"roadmap"` now, `"games"` for live tournament play);
+   `renderGames()` is left fully intact, so the live Today's Games feature returns
+   with one field change. The `/today` nav label and page title on all three pages
+   follow the mode automatically. See `CLAUDE.md` "The `/today` page: two modes,
+   one toggle".
 
 6. **What happens to `/bracket` during the interim?** *Keep it, unchanged.* It is
    the single best artifact of the 2026 archive and it renders complete, final

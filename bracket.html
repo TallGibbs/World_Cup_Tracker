@@ -451,6 +451,12 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 function kitFor(name){ return (WC.today && WC.today.kits && WC.today.kits[name]) || "var(--hairline-strong)"; }
 document.getElementById('updated').innerHTML = "Refreshed <b>"+esc(WC.meta.updated)+"</b>";
 
+/* The /today destination is repurposed between tournaments; keep its nav label
+   honest by following WC.today.mode (falls back to the static "Today's Games"). */
+if(WC.today && WC.today.mode==='roadmap'){
+  document.querySelectorAll('a[href="/today"]').forEach(a=>{a.textContent='Road to 2027';});
+}
+
 const SHORT = {r32:"R32", r16:"R16", qf:"QF", sf:"SF", third:"3rd", final:"Final"};
 const noteEl = document.getElementById('bracket-note');
 
