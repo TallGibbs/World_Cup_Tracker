@@ -37,6 +37,12 @@ The routine used to run daily, because a tournament was in progress. It is now
 The actual trigger lives in the Claude Code web scheduler and only the repository
 owner can change it; this file records the intended cadence.
 
+**Current trigger: weekly, Mondays at ~4:50 AM** (set by the owner on
+2026-07-24). So the tracker refreshes once a week, on Monday. A consequence:
+`node scripts/validate.mjs` run on any other day reports a stale-date `[FAIL]` by
+design (see "Validating on a non-run day" below) - that is expected between
+Monday runs, not a problem.
+
 When the 2027 tournament starts, revisit this (see `docs/ROADMAP.md` item 1.8) -
 daily during June-July 2027, weekly the rest of the year.
 
