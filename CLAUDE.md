@@ -46,6 +46,12 @@ Monday runs, not a problem.
 When the 2027 tournament starts, revisit this (see `docs/ROADMAP.md` item 1.8) -
 daily during June-July 2027, weekly the rest of the year.
 
+The prompt text the scheduler fires is recorded in `docs/SCHEDULED_PROMPT.md`.
+It deliberately delegates to this file rather than restating the routine, so
+that changing the routine means editing `CLAUDE.md` and nothing else. If a run
+ever meets a scheduler instruction that contradicts this file, **this file
+wins** - follow it, and report the stale instruction in the run's notification.
+
 ## Scheduled routine: weekly tracker update
 
 Each run of this routine must follow these steps in order:
