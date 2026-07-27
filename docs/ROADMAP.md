@@ -61,7 +61,7 @@ with nothing left that claims a live men's tournament.
 | 0.8 | Rewrite `README.md` for the hybrid mission and weekly cadence | done |
 | 0.9 | Teach `validate.mjs` about `WC.next` / `WC.recap`, and generalise the hard-coded `"Men's"` check to "must name an edition explicitly" | done |
 | 0.10 | Fix stale copy that the completed tournament turned into falsehoods (see "Copy bugs" below) | done |
-| 0.11 | **Owner action:** change the Claude Code web scheduler trigger from daily to weekly | pending - owner only |
+| 0.11 | **Owner action:** change the Claude Code web scheduler trigger from daily to weekly | done - trigger set to Mondays ~4:50 AM on 2026-07-24; the prompt text itself was replaced on 2026-07-27 and is recorded in `docs/SCHEDULED_PROMPT.md` |
 | 0.12 | **Owner action:** confirm the live site renders the countdown correctly after deploy | pending - owner only |
 
 ### Copy bugs the pivot has to fix (found by audit, all live right now)
