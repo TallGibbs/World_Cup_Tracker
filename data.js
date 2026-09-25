@@ -15,7 +15,7 @@
  *
  * The weekly routine edits ONLY this file's data. After editing, run
  * "node scripts/validate.mjs" (must pass) and "node scripts/snapshot.mjs".
- * See CLAUDE.md.
+ * See AGENTS.md.
  *
  * Shape:
  *   meta        - tournament/meta strings for the ARCHIVED tournament, incl.

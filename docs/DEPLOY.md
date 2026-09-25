@@ -7,7 +7,7 @@ hosting is simple: a Cloudflare Pages project connected to this GitHub repo with
 
 Once set up, nothing about the update routine changes: each run commits and
 pushes the refreshed `data.js` (and the new dated snapshots) to `main` (see
-`CLAUDE.md`), Cloudflare Pages sees the push and redeploys automatically, and the
+`AGENTS.md`), Cloudflare Pages sees the push and redeploys automatically, and the
 live site updates within a minute or two.
 
 ## Why Cloudflare Pages (migrated off Netlify)
