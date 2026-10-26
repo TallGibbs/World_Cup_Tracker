@@ -36,7 +36,7 @@ const WC = {
     "phase": "final",
     "where": "Spain are the FIFA World Cup 2026 champions, beating holders Argentina 1-0 in the final at MetLife Stadium, New Jersey, on Jul 19. England took third place, beating France 6-4 in the play-off in Miami Gardens on Jul 18. The tournament is complete.",
     "standNote": "Final group tables - all 12 groups. Our teams' groups are pinned to the top.",
-    "updated": "October 19, 2026"
+    "updated": "October 26, 2026"
   },
   "next": {
     "tournament": "FIFA Women's World Cup 2027",
@@ -1513,10 +1513,10 @@ const WC = {
   ],
   "today": {
     "mode": "roadmap",
-    "date": "Monday, October 19, 2026",
+    "date": "Monday, October 26, 2026",
     "stageLabel": "Between tournaments",
     "tz": "Kickoff times are listed in Eastern Time (ET) whenever there are matches to list. There are none until the Women's World Cup opens in Brazil on June 24, 2027.",
-    "schedNote": "No matches. The Men's World Cup 2026 finished on July 19 and the next tournament is the Women's World Cup, which opens in Brazil on June 24, 2027. England and the Netherlands both won their first-round European play-off ties on October 13, and the next competitive date for a featured nation is November 26, when both play away in the first legs of the second round; the USA follow on November 27. The Road to 2027 below has the ties and their dates. This page refreshes weekly and will fill up again once the tournament schedule is published.",
+    "schedNote": "No matches. The Men's World Cup 2026 finished on July 19 and the next tournament is the Women's World Cup, which opens in Brazil on June 24, 2027. England and the Netherlands both won their first-round European play-off ties on October 13, and the next competitive date for a featured nation is now November 27, when the USA host El Salvador in the Concacaf W Championship quarter-finals; England and the Netherlands then play away in the first legs of the European second round on December 1. The Road to 2027 below has the ties and their dates. This page refreshes weekly and will fill up again once the tournament schedule is published.",
     "kits": {},
     "games": []
   },
@@ -1538,21 +1538,21 @@ const WC = {
         "color": "#CE1124",
         "confed": "UEFA",
         "route": "European play-offs",
-        "detail": "England are through to the second round of the European play-offs after beating Greece 8-1 on aggregate (3-1 away on Oct 9, 5-0 at home on Oct 13). Next they face Ukraine, away on Nov 26 and at home on Dec 5, with the last European places settled in that round. Kickoff times are still to be confirmed."
+        "detail": "England are through to the second round of the European play-offs after beating Greece 8-1 on aggregate (3-1 away on Oct 9, 5-0 at home on Oct 13). Next they face Ukraine, away on Dec 1 (kickoff time still to be confirmed) and at Wembley on Dec 5 at 12:30 PM ET, with the last European places settled in that round."
       },
       {
         "team": "Netherlands",
         "color": "#F36C21",
         "confed": "UEFA",
         "route": "European play-offs",
-        "detail": "The Netherlands are through to the second round of the European play-offs after beating Hungary 11-0 on aggregate (8-0 away on Oct 9, 3-0 at home on Oct 13). Next they face Slovenia, away on Nov 26 and at home on Dec 5. Kickoff times are still to be confirmed."
+        "detail": "The Netherlands are through to the second round of the European play-offs after beating Hungary 11-0 on aggregate (8-0 away on Oct 9, 3-0 at home on Oct 13). Next they face Slovenia, away in Lendava on Dec 1 (kickoff time still to be confirmed) and at home in Utrecht on Dec 5 at 12:00 PM ET."
       }
     ],
     "timeline": [
       {"window": "Jul - Aug 2026", "event": "CAF WAFCON", "detail": "Africa's qualifying tournament decides the CAF places, and its window has now closed. No structured source available to this pipeline carries WAFCON, so the African qualifiers are not listed here.", "featured": false},
       {"window": "Oct 9 - 13, 2026", "event": "UEFA play-offs, round 1", "detail": "Two legs each, now complete. England beat Greece 8-1 on aggregate and the Netherlands beat Hungary 11-0, so both advance to round two.", "featured": true},
       {"window": "Nov 27 - Dec 5, 2026", "event": "Concacaf W Championship", "detail": "The USA's route: quarter-finals Nov 27-28 (USA vs El Salvador, Nov 27 at 8:30 PM ET), semi-finals Dec 1, play-ins Dec 2, the final Dec 5. Quarter-final winners go straight to Brazil.", "featured": true},
-      {"window": "Nov 26 - Dec 5, 2026", "event": "UEFA play-offs, round 2", "detail": "Europe's remaining direct places and a play-off berth are settled over eight two-legged ties. England play Ukraine and the Netherlands play Slovenia, away on Nov 26 and at home on Dec 5.", "featured": true},
+      {"window": "Dec 1 - 5, 2026", "event": "UEFA play-offs, round 2", "detail": "Europe's remaining direct places and a play-off berth are settled over eight two-legged ties. England play Ukraine and the Netherlands play Slovenia, away on Dec 1 and at home on Dec 5.", "featured": true},
       {"window": "Nov 2026 - Feb 2027", "event": "Inter-confederation play-off", "detail": "Ten teams across two phases contest the final three World Cup places.", "featured": false},
       {"window": "Dec 2026 (expected)", "event": "Final draw", "detail": "Groups are drawn; the knockout bracket can be built once this happens.", "featured": false},
       {"window": "Jun 24, 2027", "event": "Brazil 2027 kicks off", "detail": "The opening match of the tournament.", "featured": false}
@@ -1569,7 +1569,7 @@ const WC = {
       ]
     },
     "liveNote": "Live fixtures and results will appear here as each qualifying window arrives, from the same structured sources the tracker uses.",
-    "source": "Qualifying fixtures and calendars read directly from the ESPN structured API, queried one date at a time: the UEFA qualifiers (fifa.wworldq.uefa) and the Concacaf W Championship (concacaf.womens.championship). Re-checked 2026-10-19, when the feed reported all sixteen first-round return legs of Oct 13 as completed (state post) - England 5-0 Greece and Netherlands 3-0 Hungary among them, after first legs of Greece 1-3 England and Hungary 0-8 Netherlands on Oct 9 - and listed the eight second-round ties: first legs Nov 26 (Ukraine vs England, Slovenia vs Netherlands) and return legs Dec 5 (England vs Ukraine, Netherlands vs Slovenia), every one listed at the same 20:00 UTC, which looks provisional rather than confirmed, so kickoff times are not shown here. The Concacaf knockout list is unchanged in its pairings (the USA host El Salvador at 01:30 UTC on Nov 28, which is Nov 27 at 8:30 PM ET), with semi-finals on Dec 1 (22:00 UTC and 01:30 UTC Dec 2), play-ins on Dec 2 (18:00 and 21:30 UTC) and the third-place match and final on Dec 5 (20:00 and 23:30 UTC). No structured source available to this pipeline carries AFC, CAF, CONMEBOL or OFC women's qualifying, so those windows are listed from published calendars only."
+    "source": "Qualifying fixtures and calendars read directly from the ESPN structured API, queried one date at a time: the UEFA qualifiers (fifa.wworldq.uefa) and the Concacaf W Championship (concacaf.womens.championship). Re-checked 2026-10-26. The first round of the European play-offs finished on Oct 13 (Greece 1-3 England and Hungary 0-8 Netherlands on Oct 9, then England 5-0 Greece and Netherlands 3-0 Hungary). For the second round the feed has moved the first legs: it no longer lists any match on Nov 26 and now lists all eight first legs on Dec 1 (Ukraine vs England, Slovenia vs Netherlands at Sportni Park Lendava), the two featured ties still at a uniform 20:00 UTC that looks provisional, so no time is shown for them here. The return legs stay on Dec 5 and now carry individual kickoff times: Netherlands vs Slovenia at Stadion Galgenwaard, 17:00 UTC (12:00 PM ET), and England vs Ukraine at Wembley Stadium, 17:30 UTC (12:30 PM ET). The Concacaf knockout list is unchanged (the USA host El Salvador at 01:30 UTC on Nov 28, which is Nov 27 at 8:30 PM ET), with semi-finals on Dec 1 (22:00 UTC and 01:30 UTC Dec 2), play-ins on Dec 2 (18:00 and 21:30 UTC) and the third-place match and final on Dec 5 (20:00 and 23:30 UTC). ESPN's fifa.wwc league still reports 2023 as its latest season, so no 2027 draw or match schedule is available yet. No structured source available to this pipeline carries AFC, CAF, CONMEBOL or OFC women's qualifying, so those windows are listed from published calendars only."
   },
   "bracket": {
     "pending": true,
